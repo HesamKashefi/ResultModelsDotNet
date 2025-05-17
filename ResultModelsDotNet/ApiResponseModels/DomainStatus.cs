@@ -5,6 +5,7 @@ namespace ResultModelsDotNet.ApiResponseModels;
 public record DomainStatus(byte Code, string Text)
 {
     private const byte _okMaxValueInDefaultCodes = 100;
+    public static Dictionary<string, DomainStatus> Map { get; } = [];
 
     public Dictionary<string, List<string>>? Errors { get; init; }
 
@@ -15,6 +16,8 @@ public record DomainStatus(byte Code, string Text)
     public static readonly DomainStatus NO_CONTENT = InternalCreate(DomainStatusDefaults.Codes.NO_CONTENT);
 
     public static readonly DomainStatus BAD_REQUEST = InternalCreate(DomainStatusDefaults.Codes.BAD_REQUEST);
+    public static readonly DomainStatus INVALID_INPUT = BAD_REQUEST;
+    public static readonly DomainStatus INVALID_MODEL_STATE = BAD_REQUEST;
     public static readonly DomainStatus UNAUTHORIZED = InternalCreate(DomainStatusDefaults.Codes.UNAUTHORIZED);
 
     public static readonly DomainStatus INVALID_CREDENTIALS = InternalCreate(DomainStatusDefaults.Codes.INVALID_CREDENTIALS);
@@ -37,14 +40,6 @@ public record DomainStatus(byte Code, string Text)
     public static readonly DomainStatus DB_DUPLICATE_ENTITY = InternalCreate(DomainStatusDefaults.Codes.DB_DUPLICATE_ENTITY);
     public static readonly DomainStatus DB_CONSTRAINT_VIOLATION = InternalCreate(DomainStatusDefaults.Codes.DB_CONSTRAINT_VIOLATION);
     public static readonly DomainStatus DB_DEPENDECY_CONSTRAINT_VIOLATED = InternalCreate(DomainStatusDefaults.Codes.DB_DEPENDECY_CONSTRAINT_VIOLATED);
-
-
-    public static Dictionary<string, DomainStatus> Map { get; } = new()
-    {
-        { "INVALID_INPUT", BAD_REQUEST },
-        { "INVALID_MODEL_STATE", BAD_REQUEST },
-    };
-
 
     public static DomainStatus Create(byte value, [CallerMemberName] string? name = null)
     {
