@@ -2,14 +2,35 @@
 
 namespace ResultModelsDotNet.ApiResponseModels;
 
+/// <summary>
+/// Domain Status represents the status of an api response
+/// </summary>
+/// <param name="Code">A number for a specific status. (e.g 404 For NotFound)</param>
+/// <param name="Text">The name of the status in text. (e.g. NotFound)</param>
 public record DomainStatus(byte Code, string Text)
 {
     private const byte _okMaxValueInDefaultCodes = 100;
+
+    /// <summary>
+    /// A dictionary that maps the name of the status to the DomainStatus instance.
+    /// This is used when casting a <see cref="ResultModels.Result"/> to <see cref="ApiResponseModels.ApiResponse"/>"/>
+    /// it looks up the Error.Code in this dictionary to find the corresponding DomainStatus.
+    /// </summary>
     public static Dictionary<string, DomainStatus> Map { get; } = [];
 
     public Dictionary<string, List<string>>? Errors { get; init; }
 
-    public static Func<DomainStatus, bool> IsOkFunction = (DomainStatus domainStatus) => domainStatus.Code <= _okMaxValueInDefaultCodes;
+    /// <summary>
+    /// A function that determines if a DomainStatus is considered "Ok". and sets the Ok property in <see cref="ApiResponseModels.ApiResponse"/>
+    /// You can customize this function to change the criteria for what is considered "Ok".
+    /// </summary>
+    public static Func<DomainStatus, bool> IsOkFunction { get; set; } = (DomainStatus domainStatus) => domainStatus.Code <= _okMaxValueInDefaultCodes;
+
+    /// <summary>
+    /// A function that checks if the given DomainStatus is considered "Ok" based on the IsOkFunction.
+    /// </summary>
+    /// <param name="domainStatus"></param>
+    /// <returns>True if the DomainStatus is considered to be Ok</returns>
     public static bool IsOk(DomainStatus domainStatus) => IsOkFunction(domainStatus);
 
     public static readonly DomainStatus OK = InternalCreate(DomainStatusDefaults.Codes.OK);

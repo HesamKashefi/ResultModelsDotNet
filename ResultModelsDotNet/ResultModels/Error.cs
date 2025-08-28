@@ -3,6 +3,12 @@ using System.Runtime.CompilerServices;
 
 namespace ResultModelsDotNet.ResultModels;
 
+/// <summary>
+/// Specific error information that is used in the <see cref="Result"/> class to provide detailed error information.
+/// Every <see cref="Result"/> contains either a success state or an error state.
+/// </summary>
+/// <param name="Code">The text name of the error. (e.g. NotFound)</param>
+/// <param name="InnerError"></param>
 public record Error(string Code, Error? InnerError = null)
 {
     public Dictionary<string, List<string>>? ModelStateDictionary { get; init; }

@@ -2,6 +2,9 @@
 
 namespace ResultModelsDotNet.ApiResponseModels;
 
+/// <summary>
+/// Represents a standard API response
+/// </summary>
 public class ApiResponse
 {
     /// <summary>

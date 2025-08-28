@@ -2,6 +2,10 @@
 
 namespace ResultModelsDotNet.ResultModels;
 
+/// <summary>
+/// Result of an operation that can either succeed or fail.
+/// Methods should return a Result instead of throwing exceptions for expected errors.
+/// </summary>
 public class Result
 {
     public readonly bool IsSuccess;
