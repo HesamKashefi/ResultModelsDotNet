@@ -11,7 +11,8 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>asp-net-core wpf dotnet csharp result result-models</PackageTags>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,7 +22,7 @@
 		</None>
 		<None Include="..\README.md">
 			<Pack>True</Pack>
-			<PackagePath></PackagePath>
+			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
 </Project>
